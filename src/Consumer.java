@@ -1,5 +1,3 @@
-package com.kielrafal.producerconsumer2;
-
 public class Consumer implements Runnable {
 
     Container container;

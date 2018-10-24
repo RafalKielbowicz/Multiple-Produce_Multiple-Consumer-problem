@@ -1,6 +1,3 @@
-package com.kielrafal.producerconsumer2;
-
-
 public class Producer implements Runnable {
 
     Container container;
