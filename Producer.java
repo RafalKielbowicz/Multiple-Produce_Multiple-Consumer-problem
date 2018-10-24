@@ -18,7 +18,7 @@ public class Producer implements Runnable {
 
         while(true){
             try {
-                container.setValue(valueNo++,name);
+                container.setValue(name);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

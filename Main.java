@@ -7,8 +7,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Queue<Integer> redQueue = new LinkedList<>();
-        Queue<Integer> blueQueue = new LinkedList<>();
+        Queue<String> redQueue = new LinkedList<>();
+        Queue<String> blueQueue = new LinkedList<>();
 
         Container container = new Container(redQueue, blueQueue);
 

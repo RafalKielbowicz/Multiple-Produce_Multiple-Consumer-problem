@@ -5,20 +5,20 @@ import java.util.Queue;
 
 public class Container {
 
-    Queue<Integer> redQueue;
-    Queue<Integer> blueQueue;
+    Queue<String> redQueue;
+    Queue<String> blueQueue;
 
    // List<Queue> queues = Arrays.asList(redQueue,blueQueue);
 
     final int LIMIT = 4;
 
-    public Container(Queue<Integer> redQueue, Queue<Integer> blueQueue){
+    public Container(Queue<String> redQueue, Queue<String> blueQueue){
         this.redQueue = redQueue;
         this.blueQueue = blueQueue;
     }
 
 
-    public void setValue(int valueNo, String name) throws InterruptedException {
+    public void setValue(String name) throws InterruptedException {
 
         if(name == "red")
         {
@@ -31,8 +31,8 @@ public class Container {
             }
             synchronized (redQueue) {
                 System.out.println(Thread.currentThread().getName()
-                        + ": Nowa czerwona wartosc: " + valueNo);
-                redQueue.add(valueNo);
+                        + ": Nowa czerwona wartosc " + name);
+                redQueue.add(name);
                 Thread.sleep((long)(Math.random()*1000));
                 redQueue.notify();
             }
@@ -46,8 +46,8 @@ public class Container {
             }
             synchronized (blueQueue) {
                 System.out.println(Thread.currentThread().getName()
-                        + ": Nowa niebieska wartosc: " + valueNo);
-                blueQueue.add(valueNo);
+                        + ": Nowa niebieska wartosc: " + name);
+                blueQueue.add(name);
                 Thread.sleep((long)(Math.random()*1000));
                 blueQueue.notify();
             }
