@@ -1,5 +1,3 @@
-package com.kielrafal.producerconsumer2;
-
 import java.util.LinkedList;
 import java.util.Queue;
 
