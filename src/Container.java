@@ -3,12 +3,12 @@ import java.util.Queue;
 
 public class Container {
 
-    Queue<String> redQueue;
-    Queue<String> blueQueue;
+    private Queue<String> redQueue;
+    private Queue<String> blueQueue;
 
    // List<Queue> queues = Arrays.asList(redQueue,blueQueue);
 
-    final int LIMIT = 4;
+    private final int LIMIT = 4;
 
     public Container(Queue<String> redQueue, Queue<String> blueQueue){
         this.redQueue = redQueue;

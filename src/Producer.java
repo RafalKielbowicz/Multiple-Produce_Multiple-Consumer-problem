@@ -1,8 +1,7 @@
 public class Producer implements Runnable {
 
-    Container container;
-    private int valueNo;
-    String name;
+    private Container container;
+    private String name;
 
     public Producer(Container container, String name) {
         this.container = container;
