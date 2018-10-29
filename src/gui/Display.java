@@ -22,9 +22,10 @@ public class Display extends Application {
         launch(args);
     }
 
-    Queue<Integer> redQueue = new LinkedList<>();
-    Queue<Integer> blueQueue = new LinkedList<>();
-    Container container = new Container(redQueue, blueQueue);
+    private Queue<Integer> redQueue = new LinkedList<>();
+    private Queue<Integer> blueQueue = new LinkedList<>();
+    private Container container = new Container(redQueue, blueQueue);
+
     GridPane grid;
     Stage window;
 
@@ -89,7 +90,7 @@ public class Display extends Application {
         EventHandler<ActionEvent> customerHandler = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Hello");
+                takeBall(redQueue, blueQueue);
             }
         };
 
@@ -116,7 +117,6 @@ public class Display extends Application {
             blockAddition();
         } else {
             if (name == "RED") {
-                queue.add(1);
                 Circle r = new Circle();
                 r.setCenterX(90f);
                 r.setCenterY(90f);
@@ -124,27 +124,45 @@ public class Display extends Application {
                 r.setFill(Color.RED);
                 GridPane.setConstraints(r, 15 + queue.size(), 4);
                 grid.getChildren().addAll(r);
+                redQueue.add(r.hashCode());
 
             } else {
-                queue.add(1);
-                Circle r = new Circle();
-                r.setCenterX(90f);
-                r.setCenterY(90f);
-                r.setRadius(32.0f);
-                r.setFill(Color.BLUE);
-                GridPane.setConstraints(r, 25 + queue.size(), 4);
-                grid.getChildren().addAll(r);
+                Circle b = new Circle();
+                b.setCenterX(90f);
+                b.setCenterY(90f);
+                b.setRadius(32.0f);
+                b.setFill(Color.BLUE);
+                GridPane.setConstraints(b, 25 + queue.size(), 4);
+                grid.getChildren().addAll(b);
+                blueQueue.add(b.hashCode());
 
             }
         }
 
     }
 
+    void takeBall(Queue<Integer> red, Queue<Integer> blue) {
+        if (red.size() < 1 || blue.size() < 1) {
+            blockTaking();
+        } else {
+            red.poll();
+            blue.poll();
+            grid.getChildren().removeIf(node -> GridPane.getColumnIndex(node) == 15 + red.size());
+            grid.getChildren().removeIf(node -> GridPane.getColumnIndex(node) == 25 + blue.size());
+        }
+    }
+
     void blockAddition() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("UWAGA");
-        alert.setHeaderText("KOLEJKA ZAPEŁNIONA!");
-        alert.setResizable(true);
+        alert.setTitle("Error");
+        alert.setHeaderText("The container is full");
+        alert.showAndWait();
+    }
+
+    void blockTaking() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("At lease one container has not enough balls");
         alert.showAndWait();
     }
 
